@@ -32,7 +32,20 @@ Neste exercício, você irá:
 
 2. Na nova aba, a maioria dos campos será preenchida automaticamente.
 
-   - Para proprietário, escolha sua conta pessoal ou uma organização para hospedar o repositório.
+   - Para proprietário, escolha sua conta pess   # src/app.py
+   @app.post("/activities/{activity_name}/signup")
+   def signup_for_activity(activity_name: str, email: str):
+       """Sign up a student for an activity"""
+       # Validate activity exists
+       if activity_name not in activities:
+           raise HTTPException(status_code=404, detail="Activity not found")
+   
+       # Get the specific activity
+       activity = activities[activity_name]
+   
+       # Add student
+       activity["participants"].append(email)
+       return {"message": f"Signed up {email} for {activity_name}"}oal ou uma organização para hospedar o repositório.
    - Recomendamos criar um repositório público, pois repositórios privados utilizarão [minutos do Actions](https://docs.github.chttps://github.com/camilasales1/invillia-exercicio-github-copilot/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
    - Role a página para baixo e clique no botão **Create repository** no fim do formulário.
 
